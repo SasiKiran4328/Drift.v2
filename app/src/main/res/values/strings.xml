@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Drift</string>
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
+    <string name="bluetooth_toggle">Bluetooth</string>
+    <string name="hotspot_toggle">Hotspot &amp; Bluetooth</string>
+    <string name="timer_selection">Timer</string>
+    <string name="countdown">Countdown</string>
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
+    <string name="fifteen_min">15 min</string>
+    <string name="thirty_min">30 min</string>
+    <string name="sixty_min">60 min</string>
+    <string name="custom_min">Custom</string>
+    <string name="timer_progress">Timer progress</string>
+    <string name="start_stop_button">Start or stop the timer</string>
+    <string name="bluetooth_desc">Toggle Bluetooth auto-disconnect</string>
+    <string name="hotspot_desc">Toggle Hotspot and Bluetooth auto-disconnect</string>
+    <string name="timer_dropdown_desc">Timer selection</string>
+    <string name="countdown_desc">Countdown timer display</string>
+    <string name="progress_bar_desc">Timer progress bar</string>
+</resources> 
