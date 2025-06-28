@@ -17,39 +17,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drift Timer"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@id/appIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/bluetoothLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth Auto-Disconnect"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <Switch
         android:id="@+id/toggleBluetooth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Bluetooth"
-        android:textSize="20sp"
+        android:text="Enable Bluetooth Timer"
+        android:textSize="16sp"
         android:contentDescription="Toggle Bluetooth auto-disconnect"
-        app:layout_constraintTop_toBottomOf="@id/appIcon"
+        app:layout_constraintTop_toBottomOf="@id/bluetoothLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/hotspotLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hotspot Auto-Disconnect"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/toggleBluetooth"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Switch
         android:id="@+id/toggleHotspot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hotspot & Bluetooth"
-        android:textSize="20sp"
-        android:contentDescription="Toggle Hotspot and Bluetooth auto-disconnect"
-        app:layout_constraintTop_toBottomOf="@id/toggleBluetooth"
+        android:text="Enable Hotspot Timer"
+        android:textSize="16sp"
+        android:contentDescription="Toggle Hotspot auto-disconnect"
+        app:layout_constraintTop_toBottomOf="@id/hotspotLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:id="@+id/timerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Timer Display"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/toggleHotspot"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Spinner
         android:id="@+id/timerDropdown"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:contentDescription="Timer selection"
-        app:layout_constraintTop_toBottomOf="@id/toggleHotspot"
+        app:layout_constraintTop_toBottomOf="@id/timerLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginBottom="16dp"/>
 
     <TextView
         android:id="@+id/countdownText"
@@ -63,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@id/timerDropdown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="16dp"/>
 
     <ProgressBar
         android:id="@+id/timerProgressBar"

@@ -1,31 +1,31 @@
 package com.drift.service
 
 import android.app.*
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
+import android.net.wifi.WifiManager
 import android.os.*
+import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.drift.MainActivity
 
-class BluetoothService : Service() {
+class HotspotService : Service() {
 
     private var timerMillis: Long = 0
-    private var autoDisconnectBluetooth = false
+    private var autoDisconnectHotspot = false
     private var countDownTimer: CountDownTimer? = null
-    private var bluetoothAdapter: BluetoothAdapter? = null
+    private var wifiManager: WifiManager? = null
 
     companion object {
-        private const val TAG = "BluetoothService"
-        private const val NOTIFICATION_ID = 1001
-        private const val CHANNEL_ID = "drift_bluetooth_channel"
+        private const val TAG = "HotspotService"
+        private const val NOTIFICATION_ID = 1002
+        private const val CHANNEL_ID = "drift_hotspot_channel"
         
-        fun start(context: Context, timerMillis: Long, autoBluetooth: Boolean) {
-            val intent = Intent(context, BluetoothService::class.java).apply {
+        fun start(context: Context, timerMillis: Long, autoHotspot: Boolean) {
+            val intent = Intent(context, HotspotService::class.java).apply {
                 putExtra("timerMillis", timerMillis)
-                putExtra("autoDisconnectBluetooth", autoBluetooth)
+                putExtra("autoDisconnectHotspot", autoHotspot)
                 putExtra("action", "start")
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -36,7 +36,7 @@ class BluetoothService : Service() {
         }
 
         fun stop(context: Context) {
-            val intent = Intent(context, BluetoothService::class.java).apply {
+            val intent = Intent(context, HotspotService::class.java).apply {
                 putExtra("action", "stop")
             }
             context.stopService(intent)
@@ -46,8 +46,7 @@ class BluetoothService : Service() {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
-        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothAdapter = bluetoothManager.adapter
+        wifiManager = getSystemService(Context.WIFI_SERVICE) as WifiManager
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -56,11 +55,11 @@ class BluetoothService : Service() {
         when (action) {
             "start" -> {
                 timerMillis = intent.getLongExtra("timerMillis", 0)
-                autoDisconnectBluetooth = intent.getBooleanExtra("autoDisconnectBluetooth", false)
+                autoDisconnectHotspot = intent.getBooleanExtra("autoDisconnectHotspot", false)
                 
-                if (autoDisconnectBluetooth && timerMillis > 0) {
-                    startForeground(NOTIFICATION_ID, createNotification("Bluetooth timer active"))
-                    startBluetoothTimer()
+                if (autoDisconnectHotspot && timerMillis > 0) {
+                    startForeground(NOTIFICATION_ID, createNotification("Hotspot timer active"))
+                    startHotspotTimer()
                 }
             }
             "stop" -> {
@@ -71,46 +70,52 @@ class BluetoothService : Service() {
         return START_STICKY
     }
 
-    private fun startBluetoothTimer() {
+    private fun startHotspotTimer() {
         countDownTimer = object : CountDownTimer(timerMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val minutes = millisUntilFinished / 1000 / 60
                 val seconds = (millisUntilFinished / 1000) % 60
-                updateNotification("Bluetooth will disconnect in: ${String.format("%02d:%02d", minutes, seconds)}")
+                updateNotification("Hotspot will disconnect in: ${String.format("%02d:%02d", minutes, seconds)}")
             }
             
             override fun onFinish() {
-                if (autoDisconnectBluetooth) {
-                    disconnectBluetooth()
+                if (autoDisconnectHotspot) {
+                    turnOffHotspot()
                 }
-                updateNotification("Bluetooth disconnected")
+                updateNotification("Hotspot disconnected")
                 stopSelf()
             }
         }.start()
     }
 
-    private fun disconnectBluetooth() {
+    private fun turnOffHotspot() {
         try {
-            bluetoothAdapter?.let { adapter ->
-                if (adapter.isEnabled) {
-                    // Disconnect all paired devices
-                    adapter.bondedDevices?.forEach { device ->
-                        try {
-                            val method = device.javaClass.getMethod("removeBond")
-                            method.invoke(device)
-                            Log.d(TAG, "Disconnected device: ${device.name}")
-                        } catch (e: Exception) {
-                            Log.e(TAG, "Error disconnecting device: ${e.message}")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // For Android 8.0+, we need to guide user to settings
+                val panelIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                startActivity(panelIntent)
+                Log.d(TAG, "Opened wireless settings for hotspot control")
+            } else {
+                // For older versions, try programmatic control
+                wifiManager?.let { wifi ->
+                    try {
+                        val method = wifi.javaClass.getMethod("setWifiApEnabled", android.net.wifi.WifiConfiguration::class.java, Boolean::class.javaPrimitiveType)
+                        method.invoke(wifi, null, false)
+                        Log.d(TAG, "Hotspot disabled programmatically")
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error disabling hotspot: ${e.message}")
+                        // Fallback to settings
+                        val panelIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         }
+                        startActivity(panelIntent)
                     }
-                    
-                    // Disable Bluetooth
-                    adapter.disable()
-                    Log.d(TAG, "Bluetooth disabled")
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error disconnecting Bluetooth: ${e.message}")
+            Log.e(TAG, "Error turning off hotspot: ${e.message}")
         }
     }
 
@@ -118,10 +123,10 @@ class BluetoothService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "Drift Bluetooth Service",
+                "Drift Hotspot Service",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
-                description = "Shows Bluetooth timer status"
+                description = "Shows Hotspot timer status"
                 setShowBadge(false)
             }
             
@@ -140,7 +145,7 @@ class BluetoothService : Service() {
         )
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Drift - Bluetooth Timer")
+            .setContentTitle("Drift - Hotspot Timer")
             .setContentText(content)
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setOngoing(true)

@@ -1,0 +1,116 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme for light mode -->
+    <style name="Theme.Drift" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryVariant">@color/primary_variant_light</item>
+        <item name="colorOnPrimary">@color/on_primary_light</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary_light</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant_light</item>
+        <item name="colorOnSecondary">@color/on_secondary_light</item>
+        
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/surface_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/on_surface_light</item>
+        
+        <!-- Text colors -->
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+        <item name="android:textColorTertiary">@color/text_tertiary_light</item>
+        
+        <!-- Error colors -->
+        <item name="colorError">@color/error_light</item>
+        <item name="colorOnError">@color/on_error_light</item>
+        
+        <!-- Custom attributes -->
+        <item name="colorCardBackground">@color/card_background_light</item>
+        <item name="colorDivider">@color/divider_light</item>
+        <item name="colorProgressBackground">@color/progress_background_light</item>
+        <item name="colorProgressForeground">@color/progress_foreground_light</item>
+        
+        <!-- Typography -->
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Drift.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Drift.HeadlineMedium</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Drift.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Drift.BodyMedium</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Drift.LabelLarge</item>
+        
+        <!-- Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Drift.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Drift.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Drift.LargeComponent</item>
+    </style>
+    
+    <!-- Typography styles -->
+    <style name="TextAppearance.Drift.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+    
+    <style name="TextAppearance.Drift.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+    
+    <style name="TextAppearance.Drift.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+    
+    <style name="TextAppearance.Drift.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary_light</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+    
+    <style name="TextAppearance.Drift.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+    
+    <!-- Shape styles -->
+    <style name="ShapeAppearance.Drift.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.Drift.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.Drift.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    
+    <!-- Custom button style -->
+    <style name="Widget.Drift.Button" parent="Widget.Material3.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Drift.MediumComponent</item>
+    </style>
+    
+    <!-- Custom switch style -->
+    <style name="Widget.Drift.Switch" parent="Widget.Material3.Switch">
+        <item name="android:minHeight">48dp</item>
+    </style>
+    
+    <!-- Custom progress bar style -->
+    <style name="Widget.Drift.ProgressBar" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="android:minHeight">8dp</item>
+        <item name="trackCornerRadius">4dp</item>
+    </style>
+</resources> 

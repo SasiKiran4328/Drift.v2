@@ -1,7 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#BB86FC</color>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+    <!-- Light Theme Colors -->
+    <color name="primary_light">#6750A4</color>
+    <color name="primary_variant_light">#4F378B</color>
+    <color name="on_primary_light">#FFFFFF</color>
+    
+    <color name="secondary_light">#625B71</color>
+    <color name="secondary_variant_light">#4A4458</color>
+    <color name="on_secondary_light">#FFFFFF</color>
+    
+    <color name="background_light">#FFFBFE</color>
+    <color name="surface_light">#FFFBFE</color>
+    <color name="on_surface_light">#1C1B1F</color>
+    
+    <color name="text_primary_light">#1C1B1F</color>
+    <color name="text_secondary_light">#49454F</color>
+    <color name="text_tertiary_light">#79747E</color>
+    
+    <color name="error_light">#BA1A1A</color>
+    <color name="on_error_light">#FFFFFF</color>
+    
+    <color name="card_background_light">#FFFFFF</color>
+    <color name="divider_light">#E7E0EC</color>
+    <color name="progress_background_light">#E7E0EC</color>
+    <color name="progress_foreground_light">#6750A4</color>
+    
+    <!-- Dark Theme Colors -->
+    <color name="primary_dark">#D0BCFF</color>
+    <color name="primary_variant_dark">#B69DF8</color>
+    <color name="on_primary_dark">#381E72</color>
+    
+    <color name="secondary_dark">#CCC2DC</color>
+    <color name="secondary_variant_dark">#B4A5D7</color>
+    <color name="on_secondary_dark">#332D41</color>
+    
+    <color name="background_dark">#141218</color>
+    <color name="surface_dark">#141218</color>
+    <color name="on_surface_dark">#E6E1E5</color>
+    
+    <color name="text_primary_dark">#E6E1E5</color>
+    <color name="text_secondary_dark">#CAC4D0</color>
+    <color name="text_tertiary_dark">#938F99</color>
+    
+    <color name="error_dark">#FFB4AB</color>
+    <color name="on_error_dark">#690005</color>
+    
+    <color name="card_background_dark">#211F26</color>
+    <color name="divider_dark">#49454F</color>
+    <color name="progress_background_dark">#49454F</color>
+    <color name="progress_foreground_dark">#D0BCFF</color>
+    
+    <!-- Legacy colors for compatibility -->
+    <color name="purple_200">#CE93D8</color>
+    <color name="purple_500">#6750A4</color>
+    <color name="purple_700">#4F378B</color>
+    <color name="teal_200">#80CBC4</color>
+    <color name="teal_700">#018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources> 
